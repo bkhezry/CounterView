@@ -1,13 +1,9 @@
 package com.shalan.mohamed.itemcounterview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
-import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
@@ -219,8 +215,8 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
         }
         else if (i == R.id.dec_button) {
             value--;
-            if (value < 1){
-                value = 1;
+            if (value < 0){
+                value = 0;
             }
             this.itemCounterValue.setText(String.valueOf(value));
             if (this.listener != null)
