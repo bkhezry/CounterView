@@ -1,9 +1,12 @@
 package com.shalan.mohamed.itemcounterview;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.SystemClock;
+import android.os.Vibrator;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
@@ -20,6 +23,10 @@ import android.widget.TextView;
  */
 
 public class IncDecView extends RelativeLayout implements View.OnClickListener {
+    private static final int VIBRATE_DELAY_MS = 125;
+    private static final int VIBRATE_LENGTH_MS = 50;
+    private Vibrator mVibrator;
+    private long mLastVibrate;
     public static final String TAG = IncDecView.class.getSimpleName();
     private TextView itemCounterValue;
     private ImageButton incButton;
@@ -63,6 +70,7 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle){
+        mVibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
         inflate(context, R.layout.item_counter_view, this);
         this.rootView = findViewById(R.id.root_view);
         this.itemCounterValue = findViewById(R.id.item_counter_value);
@@ -204,6 +212,7 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
+        tryVibrate();
         int value = 0;
         value = Integer.parseInt(this.itemCounterValue.getText().toString());
         int i = view.getId();
@@ -215,12 +224,26 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
         }
         else if (i == R.id.dec_button) {
             value--;
-            if (value < 0){
+            if (value <= 0){
                 value = 0;
             }
             this.itemCounterValue.setText(String.valueOf(value));
             if (this.listener != null)
                 this.listener.onDecClick(this.itemCounterValue.getText().toString());
+        }
+    }
+    /**
+     * Try to vibrate. To prevent this becoming a single continuous vibration, nothing will
+     * happen if we have vibrated very recently.
+     */
+    public void tryVibrate() {
+        if (mVibrator != null) {
+            long now = SystemClock.uptimeMillis();
+            // We want to try to vibrate each individual tick discretely.
+            if (now - mLastVibrate >= VIBRATE_DELAY_MS) {
+                mVibrator.vibrate(VIBRATE_LENGTH_MS);
+                mLastVibrate = now;
+            }
         }
     }
 }
