@@ -9,5 +9,6 @@
         <attr name="border_color" format="reference|color"/>
         <attr name="startCounterValue" format="reference|string"/>
         <attr name="counterValueColor" format="reference|color"/>
+        <attr name="persianNumber" format="reference|boolean"/>
     </declare-styleable>
 </resources>
