@@ -45,6 +45,8 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
   private CounterListener listener;
   private Integer value = 0;
   private boolean persianNumber = false;
+  private Integer maxValue = Integer.MAX_VALUE;
+  private Integer minValue = Integer.MIN_VALUE;
 
   public IncDecView(Context context) {
     super(context);
@@ -92,6 +94,8 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
         this.incDecViewStartValue = a.getString(R.styleable.IncDecView_startCounterValue);
         this.incDecViewCounterValueColor = a.getColor(R.styleable.IncDecView_counterValueColor, 0);
         this.persianNumber = a.getBoolean(R.styleable.IncDecView_persianNumber, false);
+        this.minValue = a.getInteger(R.styleable.IncDecView_minNumber, Integer.MIN_VALUE);
+        this.maxValue = a.getInteger(R.styleable.IncDecView_maxNumber, Integer.MAX_VALUE);
       } catch (Exception e) {
         Log.i(TAG, "init: " + e.getLocalizedMessage());
       } finally {
@@ -240,8 +244,9 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
     }
     return this;
   }
-  public IncDecView setPersianNumber(boolean enable){
-    this.persianNumber=enable;
+
+  public IncDecView setPersianNumber(boolean enable) {
+    this.persianNumber = enable;
     return this;
   }
 
@@ -261,11 +266,19 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
     return getContext().getResources().getDrawable(drawableResource);
   }
 
+  public void setMaxValue(Integer maxValue) {
+    this.maxValue = maxValue;
+  }
+
+  public void setMinValue(Integer minValue) {
+    this.maxValue = minValue;
+  }
+
   @Override
   public void onClick(View view) {
-    tryVibrate();
     int i = view.getId();
-    if (i == R.id.inc_button) {
+    if (i == R.id.inc_button && !maxValue.equals(value)) {
+      tryVibrate();
       value++;
       if (this.persianNumber) {
         this.itemCounterValue.setText(PersianUtil.getPersianNumbers(String.valueOf(value)));
@@ -275,7 +288,8 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
       if (this.listener != null) {
         this.listener.onIncClick(this.itemCounterValue.getText().toString(), value);
       }
-    } else if (i == R.id.dec_button) {
+    } else if (i == R.id.dec_button && !minValue.equals(value)) {
+      tryVibrate();
       value--;
       if (value <= 0) {
         value = 0;

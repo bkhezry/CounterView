@@ -9,19 +9,21 @@
     <com.shalan.mohamed.itemcounterview.IncDecView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="32dp"
         app:border_color="#ffffff"
         app:border_width="0dp"
         app:counterValueColor="#666666"
         app:dec_icon="@drawable/ic_remove"
-        app:inc_icon="@drawable/ic_add"
-        app:persianNumber="true"
         app:inc_dec_button_color="#999999"
-        app:startCounterValue="0" />
+        app:inc_icon="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxNumber="10"
+        app:minNumber="3"
+        app:persianNumber="true"
+        app:startCounterValue="3" />
 
 </android.support.constraint.ConstraintLayout>
