@@ -6,8 +6,8 @@ android {
         applicationId "com.shalan.mohamed.itemcounter"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 123
-        versionName "1.2.3"
+        versionCode 125
+        versionName "1.2.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
