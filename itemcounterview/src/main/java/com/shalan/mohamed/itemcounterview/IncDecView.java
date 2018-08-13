@@ -11,10 +11,10 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,11 +29,10 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
   private long mLastVibrate;
   public static final String TAG = IncDecView.class.getSimpleName();
   private TextView itemCounterValue;
-  private ImageButton incButton;
-  private ImageButton decButton;
+  private FloatingActionButton incButton;
+  private FloatingActionButton decButton;
   private Drawable incIcon;
   private Drawable decIcon;
-  private Drawable incDecBackground;
   private Drawable viewBackground;
   private RelativeLayout rootView;
   private int strokeWidthRef = 0;
@@ -69,7 +68,6 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
   private void def(Context context) {
     this.incIcon = context.getResources().getDrawable(R.drawable.ic_add);
     this.decIcon = context.getResources().getDrawable(R.drawable.ic_remove);
-    this.incDecBackground = context.getResources().getDrawable(R.drawable.inc_dec_counter_view_button_background);
     this.viewBackground = context.getResources().getDrawable(R.drawable.inc_dec_counter_view_background);
   }
 
@@ -88,7 +86,6 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
         this.incIcon = a.getDrawable(R.styleable.IncDecView_inc_icon);
         this.decIcon = a.getDrawable(R.styleable.IncDecView_dec_icon);
         this.viewBackground = a.getDrawable(R.styleable.IncDecView_view_background);
-        this.incDecBackground = a.getDrawable(R.styleable.IncDecView_inc_dec_button_color);
         this.incDecViewBorderWidth = a.getDimension(R.styleable.IncDecView_border_width, 0);
         this.incDecViewBorderColor = a.getColor(R.styleable.IncDecView_border_color, 0);
         this.incDecViewStartValue = a.getString(R.styleable.IncDecView_startCounterValue);
@@ -109,10 +106,6 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
       }
       if (this.viewBackground != null) {
         this.rootView.setBackgroundDrawable(this.viewBackground);
-      }
-      if (this.incDecBackground != null) {
-        this.incButton.setBackgroundDrawable(this.incDecBackground);
-        this.decButton.setBackgroundDrawable(this.incDecBackground);
       }
       if (this.incDecViewBorderWidth != 0) {
         this.setBorderWidth(this.incDecViewBorderWidth);
@@ -312,7 +305,6 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
   public void tryVibrate() {
     if (mVibrator != null) {
       long now = SystemClock.uptimeMillis();
-      // We want to try to vibrate each individual tick discretely.
       if (now - mLastVibrate >= VIBRATE_DELAY_MS) {
         mVibrator.vibrate(VIBRATE_LENGTH_MS);
         mLastVibrate = now;

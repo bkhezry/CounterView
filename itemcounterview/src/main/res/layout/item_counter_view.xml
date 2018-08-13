@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/inc_dec_counter_view_background"
-    android:padding="@dimen/inc_dec_counter_view_def_padding"
-    android:id="@+id/root_view">
+    android:padding="@dimen/inc_dec_counter_view_def_padding">
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/dec_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_remove"
-        android:background="@drawable/inc_dec_counter_view_button_background"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:id="@+id/dec_button"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_remove"
+        app:backgroundTint="#37474F"
+        app:fabSize="mini" />
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/inc_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        android:background="@drawable/inc_dec_counter_view_button_background"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/inc_button"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="#37474F"
+        app:fabSize="mini" />
 
     <TextView
+        android:id="@+id/item_counter_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/item_counter_value"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>
