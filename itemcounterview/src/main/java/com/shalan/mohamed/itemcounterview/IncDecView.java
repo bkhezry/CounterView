@@ -2,6 +2,7 @@ package com.shalan.mohamed.itemcounterview;
 
 import android.app.Service;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -46,6 +47,7 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
   private boolean persianNumber = false;
   private Integer maxValue = Integer.MAX_VALUE;
   private Integer minValue = Integer.MIN_VALUE;
+  private int incDecButtonColor;
 
   public IncDecView(Context context) {
     super(context);
@@ -93,6 +95,7 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
         this.persianNumber = a.getBoolean(R.styleable.IncDecView_persianNumber, false);
         this.minValue = a.getInteger(R.styleable.IncDecView_minNumber, Integer.MIN_VALUE);
         this.maxValue = a.getInteger(R.styleable.IncDecView_maxNumber, Integer.MAX_VALUE);
+        this.incDecButtonColor = a.getColor(R.styleable.IncDecView_inc_dec_button_color, 0);
       } catch (Exception e) {
         Log.i(TAG, "init: " + e.getLocalizedMessage());
       } finally {
@@ -103,6 +106,10 @@ public class IncDecView extends RelativeLayout implements View.OnClickListener {
       }
       if (this.decIcon != null) {
         this.decButton.setImageDrawable(this.decIcon);
+      }
+      if (this.incDecButtonColor != 0) {
+        this.decButton.setBackgroundTintList(ColorStateList.valueOf(incDecButtonColor));
+        this.incButton.setBackgroundTintList(ColorStateList.valueOf(incDecButtonColor));
       }
       if (this.viewBackground != null) {
         this.rootView.setBackgroundDrawable(this.viewBackground);

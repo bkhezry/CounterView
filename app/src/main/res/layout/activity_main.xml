@@ -13,6 +13,7 @@
         app:border_color="#ffffff"
         app:border_width="0dp"
         app:counterValueColor="#2e2e2e"
+        app:inc_dec_button_color="#2e2e2e"
         app:dec_icon="@drawable/ic_remove"
         app:inc_icon="@drawable/ic_add"
         app:layout_constraintEnd_toEndOf="parent"
