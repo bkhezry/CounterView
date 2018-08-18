@@ -19,9 +19,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by mohamed on 11/15/17.
- */
 
 public class IncDecView extends RelativeLayout implements View.OnClickListener {
   private static final int VIBRATE_DELAY_MS = 125;
